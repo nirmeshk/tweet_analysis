@@ -26,8 +26,9 @@
 7. clone the project `git clone https://github.ncsu.edu/nbkhande/tweet_analysis_v1.git`
 8. `cd tweet_analysis_v1`
 9. sudo pip install -r requirements.txt
-10. Run `sparse run` in order to run the topology on local.
-11. Once the project work is done, you can dissconnect from virtualenv by running `deactivate`.
+10. Make sure your mongoDB server is up and running
+11. Run `sparse run` in order to run the topology on local.
+12. Once the project work is done, you can dissconnect from virtualenv by running `deactivate`.
 
 References:
 
