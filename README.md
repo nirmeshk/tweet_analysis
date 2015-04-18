@@ -4,6 +4,13 @@
 
 1. JDK 7+, which you can install with apt-get, homebrew, or an installler; and
 2. lein, which you can install from the [project’s page](http://leiningen.org/)
+   ```
+   a) Download lein.txt file
+   b) mv lein.txt lein
+   c) sudo mv lein /bin/
+   d) chmod a+x /bin/lein
+   ```
+
 3. Python 2.7 along with compatible pip installer. If incompatible run following command to upgrade pip.  
   ```
     sudo easy_install --upgrade pip
