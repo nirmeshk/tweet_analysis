@@ -1,4 +1,4 @@
-# GeoSpatial and Time series Analysis of Tweeter data
+# GeoSpatial and Time series Analysis of Twitter data
 
 #### Project Setup:
 
