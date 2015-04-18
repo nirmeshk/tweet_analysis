@@ -1,5 +1,8 @@
 # GeoSpatial and Time series Analysis of Twitter data
 
+#### Development Enviornment
+OS: Ubuntu 14.04.1 LTS (Codename: trusty) on 64-bit machine 
+
 #### Project Setup:
 
 1. JDK 7+, which you can install with apt-get, homebrew, or an installler; and
@@ -14,7 +17,7 @@
 
 3. Python 2.7 along with compatible pip installer. If incompatible run following command to upgrade pip.  
   ```
-    sudo easy_install --upgrade pip
+    sudo apt-get install python-pip
   ```
 4. Install Virtual Env
    ```
