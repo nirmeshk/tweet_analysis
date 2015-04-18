@@ -4,7 +4,7 @@
 
 1. JDK 7+, which you can install with apt-get, homebrew, or an installler; and
 2. lein, which you can install from the [project’s page](http://leiningen.org/)
-3. Python 2.7 along with compatible pip installer. If incompatible run following command to upgrade pip.
+3. Python 2.7 along with compatible pip installer. If incompatible run following command to upgrade pip.  
   ```
     sudo easy_install --upgrade pip
   ```
@@ -18,7 +18,7 @@
 `(project_env) user@user_machine$ `
 7. clone the project `git clone https://github.ncsu.edu/nbkhande/tweet_analysis_v1.git`
 8. `cd tweet_analysis_v1`
-9. pip install -r requirements.txt
+9. sudo pip install -r requirements.txt
 10. Run `sparse run` in order to run the topology on local.
 11. Once the project work is done, you can dissconnect from virtualenv by running `deactivate`.
 
