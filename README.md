@@ -5,17 +5,21 @@
 1. JDK 7+, which you can install with apt-get, homebrew, or an installler; and
 2. lein, which you can install from the [project’s page](http://leiningen.org/)
    ```
-   a) Download lein.txt file
-   b) mv lein.txt lein
-   c) sudo mv lein /bin/
-   d) chmod a+x /bin/lein
+   a) wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+   b) sudo mv lein /bin/
+   c) chmod a+x /bin/lein
+   d) lein -version
    ```
+   It should print `Leiningen 2.5.1 on Java 1.7.0_65 OpenJDK 64-Bit Server VM` once successfully installed.
 
 3. Python 2.7 along with compatible pip installer. If incompatible run following command to upgrade pip.  
   ```
     sudo easy_install --upgrade pip
   ```
-4. sudo pip install virtualenv
+4. Install Virtual Env
+   ```
+   sudo pip install virtualenv
+   ```
 5. Setup python virtualenv for project dependencies:
  ```
     virtualenv --python=python2.7 --no-site-packages project_env
