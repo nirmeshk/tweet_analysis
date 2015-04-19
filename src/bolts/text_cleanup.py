@@ -10,6 +10,11 @@ class TextCleanup(Bolt):
 
     def process(self, tup):
         tweet = tup.values[0]
-        txt = tweet['txt'].encode('utf-8')   
-        tweet['txt'] = re.sub(r'[^A-Za-z0-9 ]', '', txt)
+        txt = tweet['txt'].encode('utf-8') 
+        #replace non alphanumeric characters
+        txt = re.sub(r'[^A-Za-z0-9 ]', '', txt)
+        #suppress multiple spaces to single space 
+        txt = txt.strip()
+        txt = re.sub('\s+', ' ', txt)
+        tweet['txt'] = txt
         self.emit([tweet])

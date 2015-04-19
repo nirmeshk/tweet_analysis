@@ -11,7 +11,5 @@ class PrintMongo(Bolt):
 
     def process(self, tup):
         tweet = tup.values[0]
-        #self.counts[word] += 1
-        #self.emit([word, self.counts[word]])
         self.emit([tweet])
-        self.log( "Tweet:", tweet['txt'] )
+        self.log( "Tweet: %s" % tweet['txt'] )

@@ -37,6 +37,11 @@ OS: Ubuntu 14.04.1 LTS (Codename: trusty) on 64-bit machine
 11. Run `sparse run` in order to run the topology on local.
 12. Once the project work is done, you can dissconnect from virtualenv by running `deactivate`.
 
+13. Install redis server 
+  ```
+  sudo apt-get install redis-server
+  ```
+
 References:
 
 [1] [Stream Parse](https://github.com/Parsely/streamparse) for easy integration on Python with Storm.

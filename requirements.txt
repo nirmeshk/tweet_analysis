@@ -9,6 +9,7 @@ invoke==0.10.1
 paramiko==1.15.2
 pycrypto==2.6.1
 pymongo==3.0
+redis==2.10.3
 six==1.9.0
 streamparse==1.1.0
 wsgiref==0.1.2

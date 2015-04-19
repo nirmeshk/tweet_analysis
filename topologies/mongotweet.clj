@@ -25,6 +25,12 @@
           {"cleanup-bolt" :shuffle}
           "bolts.print_mongo.PrintMongo"
           ["tweet"])
+
+      "count-bolt" (python-bolt-spec
+          options
+          {"print-bolt" :shuffle}
+          "bolts.wordcount.WordCounter"
+          [])
     }
   ]
 )
