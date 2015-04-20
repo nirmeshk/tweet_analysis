@@ -26,10 +26,22 @@
           "bolts.print_mongo.PrintMongo"
           ["tweet"])
 
-      "count-bolt" (python-bolt-spec
+      "time-slot-bolt" (python-bolt-spec
           options
           {"print-bolt" :shuffle}
-          "bolts.wordcount.WordCounter"
+          "bolts.time_slot_creation.TimeSlotCreation"
+          ["slot", "txt"])
+
+      "tweet-count-bolt" (python-bolt-spec
+          options
+          {"time-slot-bolt" :shuffle}
+          "bolts.tweet_count.TweetCount"
+          [])
+
+      "tweet-sentiment-bolt" (python-bolt-spec
+          options
+          {"time-slot-bolt"  ["slot"] }
+          "bolts.sentiment.Sentiment"
           [])
     }
   ]

@@ -10,6 +10,6 @@ class PrintMongo(Bolt):
         self.counts = Counter()
 
     def process(self, tup):
-        tweet = tup.values[0]
+        tweet = tup.values[0] 
         self.emit([tweet])
         self.log( "Tweet: %s" % tweet['txt'] )
