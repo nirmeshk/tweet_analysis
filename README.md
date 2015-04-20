@@ -32,9 +32,9 @@ OS: Ubuntu 14.04.1 LTS (Codename: trusty) on 64-bit machine
   ```
     sudo apt-get install python-pip
   ```
-4. Install Virtual Env
+4. Install Python-dev and Virtual Env
    ```
-   sudo pip install virtualenv
+   sudo pip install -y python-dev virtualenv
    ```
 5. Setup python virtualenv for project dependencies:
  ```
