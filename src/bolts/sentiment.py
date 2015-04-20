@@ -10,7 +10,8 @@ class Sentiment(Bolt):
     def initialize(self, conf, ctx):
         pass
 	self.s = SentimentAnalysis()
-
+        self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
+        
     def process(self, tup):
         slot = tup.values[0]
         txt = tup.values[1]

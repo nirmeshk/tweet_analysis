@@ -1,8 +1,8 @@
-(ns mongoTweet
+(ns tweetAnalysis
   (:use     [streamparse.specs])
   (:gen-class))
 
-(defn mongoTweet [options]
+(defn tweetAnalysis [options]
    [
     ;; spout configuration
     {"mongo-spout" (python-spout-spec
@@ -14,6 +14,7 @@
     
     ;; bolt configuration
     {
+      ;; Time series analysis bolts
       "cleanup-bolt" (python-bolt-spec
           options
           {"mongo-spout" :shuffle}
@@ -43,6 +44,20 @@
           {"time-slot-bolt"  ["slot"] }
           "bolts.sentiment.Sentiment"
           [])
+
+      ;; Geo Spatial Analysis Bolts
+      "location-filter-bolt" (python-bolt-spec
+          options
+          {"mongo-spout" :shuffle}
+          "bolts.geo_spatial_tweet_analysis.FiltertMissingLocation"
+          ["country_code", "txt"])
+
+      "location-tweet-count" (python-bolt-spec
+          options
+          {"location-filter-bolt" ["country_code"]}
+          "bolts.geo_spatial_tweet_analysis.LocationTweetCount"
+          [])
+
     }
   ]
 )
