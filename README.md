@@ -7,7 +7,7 @@ OS: Ubuntu 14.04.1 LTS (Codename: trusty) on 64-bit machine
 #### Data Format for redis storage
 
 ##### Time Series
-- Using (hash)[http://redis.io/commands/hincrby] data structure of redis. 
+- Using [hash](http://redis.io/commands/hincrby) data structure of redis. 
 - Hash key will be of format `time_slot:12` , `time_slot:27` ; where 12 and 27 and bin numbers.
 - A hash has multiple "fields" which we will use to store summary for particular bin.
   - `tweet_count`: count of tweets received in this particular slot
