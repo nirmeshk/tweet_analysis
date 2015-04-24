@@ -43,7 +43,8 @@ OS: Ubuntu 14.04.1 LTS (Codename: trusty) on 64-bit machine
  
 6. Run `source project_env/bin/activate` . Now your bash prompt should begin with 
 `(project_env) user@user_machine$ `
-7. clone the project `git clone https://github.ncsu.edu/nbkhande/tweet_analysis_v1.git`
+
+7. clone the project `git clone git@github.com:nirmeshKhandelwal/tweet_analysis.git`
 8. `cd tweet_analysis_v1`
 9. 
 - sudo pip install -r requirements.txt
