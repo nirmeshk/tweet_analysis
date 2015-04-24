@@ -21,7 +21,13 @@ RUN apt-get install git-core -y
 RUN pip install virtualenv
 RUN apt-get install python-dev -y
 RUN pip install streamparse
+RUN pip install -r requirements.txt
+RUN python2 -m textblob.download_corpora
+
+# Install Numpy
+RUN apt-get install cython
+RUN apt-get install python-scipy 
+RUN apt-get install python-numpy
 
 ADD . /code
 WORKDIR /code
-RUN pip install -r requirements.txt

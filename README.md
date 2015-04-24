@@ -45,7 +45,10 @@ OS: Ubuntu 14.04.1 LTS (Codename: trusty) on 64-bit machine
 `(project_env) user@user_machine$ `
 7. clone the project `git clone https://github.ncsu.edu/nbkhande/tweet_analysis_v1.git`
 8. `cd tweet_analysis_v1`
-9. sudo pip install -r requirements.txt
+9. 
+- sudo pip install -r requirements.txt
+- python2 -m textblob.download_corpora 
+
 10. Make sure your mongoDB server is up and running
 11. Run `sparse run` in order to run the topology on local.
 12. Once the project work is done, you can dissconnect from virtualenv by running `deactivate`.
