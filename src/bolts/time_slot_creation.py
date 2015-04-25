@@ -2,19 +2,19 @@ from __future__ import absolute_import, print_function, unicode_literals, divisi
 
 from streamparse.bolt import Bolt
 import math
-import helper.readproperties
+#import helper.readproperties
 
 class TimeSlotCreation(Bolt):
 
     def initialize(self, conf, ctx):
-        config = ReadProperties()
-        prop = config.getProperties
+        #config = ReadProperties()
+        #prop = config.getProperties
         # size of slot duration
-        #self.duration = 5000
-        self.duration = prop["slot_duration"]
+        self.duration = 5000
+        #self.duration = prop["slot_duration"]
         # start time of slot
-        #self.start_ts = 1427329782738
-        self.start_ts = prop["ts_start"]
+        self.start_ts = 1427329782738
+        #self.start_ts = prop["ts_start"]
 
     def process(self, tup):
         tweet = tup.values[0]
