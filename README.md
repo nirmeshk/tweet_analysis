@@ -46,9 +46,8 @@ OS: Ubuntu 14.04.1 LTS (Codename: trusty) on 64-bit machine
 
 7. clone the project `git clone git@github.com:nirmeshKhandelwal/tweet_analysis.git`
 8. `cd tweet_analysis_v1`
-9. 
-- sudo pip install -r requirements.txt
-- python2 -m textblob.download_corpora 
+9.  `sudo pip install -r requirements.txt`
+    `python2 -m textblob.download_corpora `
 
 10. Make sure your mongoDB server is up and running
 11. Run `sparse run` in order to run the topology on local.

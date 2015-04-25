@@ -61,16 +61,12 @@ class Sketch:
             raise ValueError("delta must be between 0 and 1, exclusive")
         if epsilon <= 0 or epsilon >= 1:
             raise ValueError("epsilon must be between 0 and 1, exclusive")
-        if k < 1:
-            raise ValueError("k must be a positive integer")
 
         self.w = int(math.ceil(math.exp(1) / epsilon))
         self.d = int(math.ceil(math.log(1 / delta)))
-        self.k = k
         self.hash_functions = [self.__generate_hash_function() for i in range(self.d)]
         # All zero table of size self.d * self.w
         self.count =  [[0 for y in range(self.w)] for x in range(self.d)] 
-        self.heap, self.top_k = [], {} # top_k => [estimate, key] pairs
 
     def update(self, key, increment):
         """
@@ -94,7 +90,7 @@ class Sketch:
             column = hash_function(abs(hash(key)))
             self.count[row][column] += increment
 
-        self.update_heap(key)
+        #self.update_heap(key)
 
     def update_heap(self, key):
         """

@@ -61,13 +61,13 @@
       ;; Top-k Words
       "tweet-split-and-filter-bolt" (python-bolt-spec
           options
-          {"time-slot-bolt" :shuffle}
-          "bolts.tweet_count.SplitTweetAndFilter"
-          ["word"])
-
+          {"cleanup-bolt" :shuffle}
+          "bolts.tweet_count.SplitTweetAndFilter" 
+          ["words"])
+      
       "top-k-bolt" (python-bolt-spec
           options
-          {"tweet-split-and-filter-bolt" ["word"]}
+          {"tweet-split-and-filter-bolt" ["words"]}
           "bolts.tweet_count.TopK"
           [])
     }

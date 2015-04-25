@@ -2,8 +2,8 @@ from __future__ import absolute_import, print_function, unicode_literals, divisi
 
 from streamparse.bolt import Bolt
 import redis
-from nltk.corpus import stopwords
 from helper.cmsketch import Sketch
+from helper.readproperties import ReadStopWords
 
 class TweetCount(Bolt):
     """ This Bolt will count the number of tweets received in particular time slot and store it in hash data structure in Redis"""
@@ -24,23 +24,29 @@ class SplitTweetAndFilter(Bolt):
     """ This Bolt will split the sentence and remove all the stop-words"""
 
     def initialize(self, conf, ctx):
-        self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
+        sw = ReadStopWords()
+        self.stop_words = sw.getStopWords()
+        
 
     def process(self, tup):
-        stop_words = stopwords.words('english')
-
-        #slot = tup.values[0]
-        txt = tup.values[1]
+        tweet = tup.values[0]
+        txt = tweet['txt']
 
         #Filter stop words
-        filtered_words = [word for word in txt.split(' ') if not word in stop_words]
-        
-        #remove empty strings
-        filtered_words = [word for word in filtered_words if word]
+        words = txt.split(' ')
+        filtered_words = []
 
-        #Emit the words
-        if len(filtered_words) > 0:
-            emit_many(filtered_words)
+        for w in words:
+            if w not in self.stop_words:
+                filtered_words.append(w)
+        
+        words = [[word] for word in filtered_words if word]
+        if not words:
+            # no words to process in the sentence, fail the tuple
+            self.fail(tup)
+            return
+        #self.log(words)
+        self.emit_many(words)
 
 
 class TopK(Bolt):
@@ -52,31 +58,27 @@ class TopK(Bolt):
     """
 
     def initialize(self, conf, ctx):
-        self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
+        #pass
+        self.r = redis.Redis(host='localhost', port=6379, db=0)
         self.k = 50 #k value for topK
-
+        
         #Initialize count Min Sketch
         self.sketch = Sketch(10**-7, 0.005, self.k)
 
     def process(self, tup):
         word = tup.values[0]
-
+        self.log("Topk: %s" % word)
         #Add the word to count min sketch sketch.
         self.sketch.update(word, 1)
-        
-        #update the topk heap
-        #self.sketch.update_heap(word)
 
-        #update the redis map
-        # zrange top-k -1 -1 withscores
-
-        #ZCOUNT myzset -inf +inf
-
+        #If total words in top-k less than freq, add the word directly
         if self.r.zcount("top-k", "-inf", "+inf") < self.k:
             self.r.zadd("top-k", word, self.sketch.get(word))
         else:
-            w, freq = self.r.zrange("top-k", -1, -1, "withscores")
+            w, freq = self.r.zrange("top-k", -1, -1, withscores= True)[0]
 
+            #If word freq is higher than least freq of top-k list
+            #Replace the word by current word
             if freq and freq < self.sketch.get(word):
                 self.r.zrem("top-k", w)
                 self.r.zadd("top-k", word, self.sketch.get(word))
