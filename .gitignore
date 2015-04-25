@@ -2,3 +2,6 @@
 _build
 _resources
 logs
+maps/bin
+maps/*.log
+maps/node_modules

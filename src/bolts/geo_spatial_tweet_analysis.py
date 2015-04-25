@@ -35,6 +35,7 @@ class LocationTweetCount(Bolt):
 
         # Increment "tweet_count" field of hash
         self.r.hincrby(redis_hash, "t_count", 1)
+        self.r.hset(redis_hash, "c_code", country_code)
         self.r.hset(redis_hash, "s_pos", 0)
         self.r.hset(redis_hash, "s_neg", 0)
         self.r.hset(redis_hash, "s_neu", 0)

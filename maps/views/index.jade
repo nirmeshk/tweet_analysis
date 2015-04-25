@@ -1,0 +1,18 @@
+extends layout
+block styles
+
+block scripts
+	// enable socket.io communication on the client-side
+	script(src='/socket.io/socket.io.js')
+	script(src='/javascripts/datamap.js')
+	script(src='/javascripts/d3.min.js')
+	script(src='/javascripts/topojson.min.js')
+	script(src='/javascripts/datamaps.all.js')
+	script(src='/javascripts/country.js')
+	
+block content
+	div(class="container")
+		div.page-header: h1 Cricket Match Tweet Analysis 
+		div(class="row")
+			div(class="col-lg-6")
+				div(id="worldmap" style="position: relative; width:850px; height:450px;")
