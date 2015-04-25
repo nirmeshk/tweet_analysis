@@ -58,6 +58,18 @@
           "bolts.geo_spatial_tweet_analysis.LocationTweetCount"
           [])
 
+      ;; Top-k Words
+      "tweet-split-and-filter-bolt" (python-bolt-spec
+          options
+          {"time-slot-bolt" :shuffle}
+          "bolts.tweet_count.SplitTweetAndFilter"
+          ["word"])
+
+      "top-k-bolt" (python-bolt-spec
+          options
+          {"tweet-split-and-filter-bolt" ["word"]}
+          "bolts.tweet_count.TopK"
+          [])
     }
   ]
 )
