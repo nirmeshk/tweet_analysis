@@ -58,6 +58,12 @@
           "bolts.geo_spatial_tweet_analysis.LocationTweetCount"
           [])
 
+      "location-tweet-sentiment-count" (python-bolt-spec
+          options
+          {"location-filter-bolt" ["country_code"]}
+          "bolts.geo_spatial_tweet_analysis.LocationTweetSentimentCount"
+          [])
+
     }
   ]
 )

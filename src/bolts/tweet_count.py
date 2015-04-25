@@ -16,7 +16,7 @@ class TweetCount(Bolt):
         redis_hash = "time_slot:" + str(slot) 
 
         # Increment "tweet_count" field of hash
-        self.r.hincrby(redis_hash, "tweet_count", 1)
+        self.r.hincrby(redis_hash, "t_count", 1)
         
         
 

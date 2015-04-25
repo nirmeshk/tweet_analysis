@@ -22,7 +22,6 @@ class TimeSlotCreation(Bolt):
         tweet = tup.values[0]
         # get time stamp value
         ts = int(tweet['ts'])
-        self.log( "Duration: %s" % self.duration)
         slot = getTimeSlot(ts , self.start_ts, self.duration)
         txt = tweet['txt']
         # prepare hash to store in redis
@@ -34,8 +33,12 @@ class TimeSlotCreation(Bolt):
 
         # Initialize slot number, start time, end time field of hash
         self.r.hset(redis_hash, "slot_no", slot)
-        self.r.hset(redis_hash, "end_time", end_time)
-        self.r.hset(redis_hash, "start_time", start_time)
+        self.r.hset(redis_hash, "end_ts", end_time)
+        self.r.hset(redis_hash, "str_ts", start_time)
+        #self.r.hset(redis_hash, "t_count", 0)
+        self.r.hset(redis_hash, "s_pos", 0)
+        self.r.hset(redis_hash, "s_neg", 0)
+        self.r.hset(redis_hash, "s_neu", 0)
 
         self.emit( [slot, txt] )
         self.log( "%s: %s" % (slot, txt) )
