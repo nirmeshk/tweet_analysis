@@ -16,5 +16,5 @@ class TextCleanup(Bolt):
         #suppress multiple spaces to single space 
         txt = txt.strip()
         txt = re.sub('\s+', ' ', txt)
-        tweet['txt'] = txt
+        tweet['txt'] = txt.lower()
         self.emit([tweet])

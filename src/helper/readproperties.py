@@ -10,3 +10,13 @@ class ReadProperties:
 
     def getProperties(self):
         return self.prop
+
+class ReadStopWords:
+    def __init__(self):
+        self.stop_words = []
+        with open("helper/stop-words.txt", 'r') as f:
+            for word in f:
+                self.stop_words.append(word.strip().lower())
+
+    def getStopWords(self):
+        return self.stop_words
