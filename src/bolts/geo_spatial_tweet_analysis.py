@@ -4,11 +4,15 @@ from streamparse.bolt import Bolt
 import redis
 from iso3166 import countries
 from textblob import TextBlob
+from pytz import country_timezones
 
 class FiltertMissingLocation(Bolt):
     """ This Bolt will filter out all the tweets where location is absent"""
 
     def initialize(self, conf, ctx):
+        self.timezone_countries = {str(timezone).split('/')[1]: str(country)
+                          for country, timezones in country_timezones.iteritems()
+                          for timezone in timezones}
         pass
 
     def process(self, tup):
@@ -19,6 +23,14 @@ class FiltertMissingLocation(Bolt):
             txt = tweet['txt']
             country_code = tweet['c_code']
             self.emit([country_code, txt])
+        elif ("tz" in tweet) and ("txt" in tweet):
+            try:
+                txt = tweet['txt']
+                timezone = tweet['tz']
+                country_code = self.timezone_countries[str(timezone)]
+                self.emit([country_code, txt])
+            except KeyError:
+                pass
 
 
 class LocationTweetCount(Bolt):

@@ -22,7 +22,7 @@ $(document).ready(function(){
 
    });
 
-
+	map.legend();
 	socket.on('country-json', function(data) {
 		map.updateChoropleth(data);
 	});
