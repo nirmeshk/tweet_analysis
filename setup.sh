@@ -12,7 +12,6 @@ chmod a+x /bin/lein
 lein -version
 
 # Install virtual-env, git 
-apt-get install git-core -y
 pip install virtualenv
 apt-get install python-dev -y
 pip install streamparse
@@ -25,15 +24,17 @@ apt-get install -y mongodb-org
 service mongod start
 
 #Install Redis
+cd ~
 wget http://download.redis.io/redis-stable.tar.gz
 tar xvzf redis-stable.tar.gz
 cd redis-stable
 make
 cd src
 make install
+redis-server &
 cd ~
 
-service mongod start
+service mongod start &
 
 #Install all python dependencies
 #cd ~/tweet_analysis/
