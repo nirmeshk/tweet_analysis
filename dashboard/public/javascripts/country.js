@@ -43,11 +43,11 @@ function getColorFillJson(){
 		
 	var colorFill = {};
 	for(var i=0; i < heatColors.length; i++){
-		var key = 'HEAT_' + (i+1);
+		var key = 'Level_' + (i+1);
 		colorFill[key] = heatColors[i];
 	}
-	colorFill['UNKNOWN'] = 'rgb(0,0,0)';	
-	colorFill['defaultFill'] = 'green';	
+	colorFill['UNKNOWN'] = '#a9a9a9';	
+	colorFill['defaultFill'] = '#a9a9a9';	
 	return colorFill;
 }
 

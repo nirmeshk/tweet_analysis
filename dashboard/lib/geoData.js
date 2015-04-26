@@ -98,7 +98,7 @@ var heatColors = 13;
 function getHeatMapColor(count, total_count){
 		
 	color_index = Math.ceil(Math.log(count)) + 1;
-	return "HEAT_" + color_index;
+	return "Level_" + color_index;
 }
 
 module.exports = geoData;
