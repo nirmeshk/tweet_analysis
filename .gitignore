@@ -2,3 +2,6 @@
 _build
 _resources
 logs
+dashboard/bin
+dashboard/*.log
+dashboard/node_modules

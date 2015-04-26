@@ -16,3 +16,4 @@ six==1.9.0
 streamparse==1.1.0
 textblob==0.9.0
 wsgiref==0.1.2
+pytz==2015.2

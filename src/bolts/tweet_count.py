@@ -18,7 +18,8 @@ class TweetCount(Bolt):
         redis_hash = "time_slot:" + str(slot) 
 
         # Increment "tweet_count" field of hash
-        self.r.hincrby(redis_hash, "tweet_count", 1)
+        self.r.hincrby(redis_hash, "t_count", 1)
+
 
 class SplitTweetAndFilter(Bolt):
     """ This Bolt will split the sentence and remove all the stop-words"""
@@ -26,7 +27,6 @@ class SplitTweetAndFilter(Bolt):
     def initialize(self, conf, ctx):
         sw = ReadStopWords()
         self.stop_words = sw.getStopWords()
-        
 
     def process(self, tup):
         tweet = tup.values[0]

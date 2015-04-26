@@ -58,18 +58,24 @@
           "bolts.geo_spatial_tweet_analysis.LocationTweetCount"
           [])
 
-      ;; Top-k Words
-      "tweet-split-and-filter-bolt" (python-bolt-spec
+      "location-tweet-sentiment-count" (python-bolt-spec
           options
-          {"cleanup-bolt" :shuffle}
-          "bolts.tweet_count.SplitTweetAndFilter" 
-          ["words"])
-      
-      "top-k-bolt" (python-bolt-spec
-          options
-          {"tweet-split-and-filter-bolt" ["words"]}
-          "bolts.tweet_count.TopK"
+          {"location-filter-bolt" ["country_code"]}
+          "bolts.geo_spatial_tweet_analysis.LocationTweetSentimentCount"
           [])
+
+      ;; Top-k Words
+;;      "tweet-split-and-filter-bolt" (python-bolt-spec
+;;          options
+;;          {"cleanup-bolt" :shuffle}
+;;          "bolts.tweet_count.SplitTweetAndFilter" 
+;;          ["words"])
+      
+;;      "top-k-bolt" (python-bolt-spec
+;;          options
+;;          {"tweet-split-and-filter-bolt" ["words"]}
+;;          "bolts.tweet_count.TopK"
+;;          [])
     }
   ]
 )

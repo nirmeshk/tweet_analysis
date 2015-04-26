@@ -19,20 +19,20 @@ class Sentiment(Bolt):
 
         #calculate sentiment of txt
         #sentiment = self.s.get_sentiment(txt)
-	tweet_sent = TextBlob(txt)
-	polarity = tweet_sent.sentiment.polarity
-	if polarity > 0:
-		sentiment = "pos"
-	elif polarity == 0:
-		sentiment = "neutral"
-	else:
-		sentiment = "neg"
+    	tweet_sent = TextBlob(txt)
+    	polarity = tweet_sent.sentiment.polarity
+    	if polarity > 0:
+    		sentiment = "pos"
+    	elif polarity == 0:
+    		sentiment = "neu"
+    	else:
+    		sentiment = "neg"
         
         # prepare hash to store in redis
         redis_hash = "time_slot:" + str(slot)
 
         # create field name For e.g sentiment_pos , sentiment_neg 
-        field = "sentiment_" + sentiment
+        field = "s_" + sentiment
 
         # Increment "tweet_count" field of hash
         self.r.hincrby(redis_hash, field, 1)
