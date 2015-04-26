@@ -2,14 +2,20 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 from streamparse.bolt import Bolt
 import re
+import redis
 
 class TextCleanup(Bolt):
 
     def initialize(self, conf, ctx):
+        self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
         pass
 
     def process(self, tup):
         tweet = tup.values[0]
+        
+        # Storing tweets into redis list
+        self.r.rpush("Tweets", tweet['txt'])
+
         txt = tweet['txt'].encode('utf-8') 
         #replace non alphanumeric characters
         txt = re.sub(r'[^A-Za-z0-9 ]', '', txt)
