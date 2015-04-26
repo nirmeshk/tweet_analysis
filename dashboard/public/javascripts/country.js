@@ -35,9 +35,8 @@ function getCountryTweetJson(){
 }
 
 //var heatColors = ["#ffffe6", "#ffffb3", "#ffff80", "#ffff4d", "#ffff19", 
-var heatColors = [ "#ffff00", "#ffed00",
-                  "#ffdb00", "#ffc800", "#ffb600","#ffa400", "#ff9200", "#ff8000", "#ff6d00", 
-				  "#ff5b00", "#ff4900", "#ff3700", "#ff2400", "#ff1200", "#ff0000"];
+var heatColors = [ "#ffff4d","#ffff19","#ffdb00", "#ffc800", "#ffb600","#ffa400", "#ff9200", "#ff8000", "#ff6d00", 
+				  "#ff5b00", "#ff4900", "#ff3700", "#ff2400"];
 
 
 function getColorFillJson(){

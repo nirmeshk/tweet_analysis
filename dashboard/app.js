@@ -13,10 +13,13 @@ var server = require('http').createServer(app);
 var port = 3000;
 
 var geoData = require('./lib/geoData');
+//var timeseriesData = require('./lib/tsData');
 
 var gData = new geoData("dummy");
 gData.getCountryJson();
 
+//var tsData = new timeSeriesData("dummy");
+//tsData.getTimeSeriesData();
 
 server.listen(3000);
 console.log("Socket.io server listening at http://127.0.0.1: " + port);
@@ -34,8 +37,7 @@ sio.sockets.on('connection', function(socket){
 		console.log('Web client disconnected');
 	});
 
-	 // Sending current customized tweet-json on the browser with certain time Interval
-	 console.log(gData.getUpdatedCountryJson());
+	 // Geo-space UI API calls
      setInterval(function(){
          socket.emit('country-json', gData.getUpdatedCountryJson());
       }, 4000+Math.round(100*Math.random())
@@ -45,6 +47,14 @@ sio.sockets.on('connection', function(socket){
          gData.getCountryJson();
       }, 2000+Math.round(100*Math.random())
      );
+
+	 // Time-Series UI API Calls
+
+
+	 // Top-K Bubble Chart UI API Calls
+
+
+
 });
 
 

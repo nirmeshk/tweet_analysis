@@ -1,4 +1,3 @@
-
 var redis = require('redis');
 var rclient = redis.createClient( 6379, '127.0.0.1');
 var dummy;
@@ -86,14 +85,11 @@ geoData.prototype.getUpdatedCountryJson = function(){
 	return country_json;
 }
 
-var heatColors = 15;
-
+var heatColors = 13;
 
 function getHeatMapColor(count, total_count){
 		
-	var ratio = count/total_count;
-	color_index = Math.ceil(ratio * heatColors);
-	
+	color_index = Math.ceil(Math.log(count)) + 1;
 	return "HEAT_" + color_index;
 }
 

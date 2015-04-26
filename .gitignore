@@ -2,6 +2,6 @@
 _build
 _resources
 logs
-maps/bin
-maps/*.log
-maps/node_modules
+dashboard/bin
+dashboard/*.log
+dashboard/node_modules
