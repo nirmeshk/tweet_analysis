@@ -2,19 +2,18 @@ FROM ubuntu:trusty
 MAINTAINER Nirmesh Khandelwal <nbkhande@ncsu.edu>
 RUN apt-get update 
 RUN echo Y | apt-get install python-pip
-
+RUN apt-get install wget -y
 # Installing Java
-RUN echo Y | apt-get install python-software-properties
-RUN echo Y | apt-get install software-properties-common
-RUN add-apt-repository ppa:webupd8team/java
-RUN apt-get update
-RUN echo Y | apt-get install oracle-java8-installer -y
+RUN apt-get install openjdk-7-jdk -y
 
 #Installing leign
 RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 RUN mv lein /bin/
 RUN chmod a+x /bin/lein
 RUN lein -version
+
+ADD . /code
+WORKDIR /code
 
 # Install virtual-env, git 
 RUN apt-get install git-core -y
@@ -23,10 +22,4 @@ RUN apt-get install python-dev -y
 RUN pip install streamparse
 RUN pip install -r requirements.txt
 
-# Install Numpy
-RUN apt-get install cython
-RUN apt-get install python-scipy 
-RUN apt-get install python-numpy
 
-ADD . /code
-WORKDIR /code
