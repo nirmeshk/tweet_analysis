@@ -41,12 +41,9 @@ class SplitTweetAndFilter(Bolt):
                 filtered_words.append(w)
         
         words = [[word] for word in filtered_words if word]
-        if not words:
-            # no words to process in the sentence, fail the tuple
-            self.fail(tup)
-            return
-        #self.log(words)
-        self.emit_many(words)
+        if words:
+            #self.log(words)
+            self.emit_many(words)
 
 
 class TopK(Bolt):
