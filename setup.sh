@@ -9,6 +9,7 @@ apt-get install openjdk-7-jdk -y
 wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 mv lein /bin/
 chmod a+x /bin/lein
+env LEIN_ROOT=yes
 lein -version
 
 # Install virtual-env, git 
@@ -33,11 +34,12 @@ cd src
 make install
 redis-server &
 cd ~
+sleep 1
 
 service mongod start &
+sleep 1
 
 #Install all python dependencies
-#cd ~/tweet_analysis/
-#pip install -r requirements.txt
-#cd ~
-#mongoimport --db twitterstream --collection cwctweets --file tweet_analysis/data/cwctweets.json
+cd ~/tweet_analysis/
+pip install -r requirements.txt
+mongoimport --db twitterstream --collection cwctweets --file data/cwctweets.json
