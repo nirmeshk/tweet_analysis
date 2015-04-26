@@ -1,7 +1,8 @@
-var server_name = "http://127.0.0.1:3000/";
-var socket = io.connect(server_name);
 
 $(document).ready(function(){
+
+	var server_name = window.location.href;
+	var socket = io.connect(server_name);
 
 	var countries = getCountryTweetJson();
 	var colorFills = getColorFillJson();
