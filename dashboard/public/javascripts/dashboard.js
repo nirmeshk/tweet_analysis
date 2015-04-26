@@ -28,6 +28,11 @@ $(document).ready(function(){
 		map.updateChoropleth(data);
 	});
 
+	socket.on('tweet-json', function(data){
+		var countHtml = "<span style='font-weight: bold;color:#000066'> #" + data.count +": </span>";
+		var tweetHtml = "<span style='color:#3366FF'> " + data.text +"<span> <br/>";
+		$('#tweet_log').prepend(countHtml + tweetHtml);	
+	});
 
 });
 

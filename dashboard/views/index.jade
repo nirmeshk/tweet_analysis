@@ -4,7 +4,7 @@ block styles
 block scripts
 	// enable socket.io communication on the client-side
 	script(src='/socket.io/socket.io.js')
-	script(src='/javascripts/datamap.js')
+	script(src='/javascripts/dashboard.js')
 	script(src='/javascripts/d3.min.js')
 	script(src='/javascripts/topojson.min.js')
 	script(src='/javascripts/datamaps.all.js')
@@ -20,7 +20,7 @@ block content
 				div(class="panel panel-info" id="tweet_panel")
 					div(class="panel-heading")
 						h3(class="panel-title") Tweets Log
-					div(class="panel-body")
+					div(class="panel-body" style="overflow:auto")
 						div(id="tweet_log" style="position: relative; width:900px; height:200px;")
 
 			//For Tweets Analysis Text						

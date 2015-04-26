@@ -13,10 +13,13 @@ var server = require('http').createServer(app);
 var port = 3000;
 
 var geoData = require('./lib/geoData');
+var textData = require('./lib/textData');
 //var timeseriesData = require('./lib/tsData');
 
 var gData = new geoData("dummy");
 gData.getCountryJson();
+
+var tData = new textData("dummy");
 
 //var tsData = new timeSeriesData("dummy");
 //tsData.getTimeSeriesData();
@@ -48,11 +51,16 @@ sio.sockets.on('connection', function(socket){
       }, 2000+Math.round(100*Math.random())
      );
 
-	 // Time-Series UI API Calls
+	 // Tweet Text UI API Calls
+     setInterval(function(){
+         socket.emit('tweet-json', tData.getUpdatedTextJson());
+      }, 1000
+     );
 
-
-	 // Top-K Bubble Chart UI API Calls
-
+     setInterval(function(){
+         tData.getTextJson();
+      }, 980
+	 );
 
 
 });
