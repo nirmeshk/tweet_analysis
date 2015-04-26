@@ -7,6 +7,7 @@ $(document).ready(function(){
 	var colorFills = getColorFillJson();
 	var map = new Datamap({
 	 						element: document.getElementById("worldmap"),
+							height: 500, 
 							fills : colorFills ,
 							data : countries,
 					        geographyConfig: {

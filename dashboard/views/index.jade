@@ -12,7 +12,42 @@ block scripts
 	
 block content
 	div(class="container")
-		div.page-header: h1 Cricket Match Tweet Analysis 
+		div.page-header: h1 Twitter Dashboard : Cricket Match Analysis
+							img(src="/images/twitter_icon.png")
 		div(class="row")
-			div(class="col-lg-6")
-				div(id="worldmap" style="position: relative; width:850px; height:450px;")
+			// For Tweet Log Series Analysis
+			div(class="col-lg-8")
+				div(class="panel panel-info" id="tweet_panel")
+					div(class="panel-heading")
+						h3(class="panel-title") Tweets Log
+					div(class="panel-body")
+						div(id="tweet_log" style="position: relative; width:900px; height:200px;")
+
+			//For Tweets Analysis Text						
+			div(class="col-lg-4")
+				div(class="panel panel-info" id="tweet_anl_panel")
+					div(class="panel-heading")
+						h3(class="panel-title") Analysis
+					div(class="panel-body")
+						div(id="tweet_analysis" style="position: relative; height:200px;")
+
+
+		div(class="row")
+			// For Time Series Analysis
+			div(class="col-lg-12")
+				div(class="panel panel-info" id="ts_panel")
+					div(class="panel-heading")
+						h3(class="panel-title") Time Series
+					div(class="panel-body")
+						div(id="timeseries" style="position: relative; height:400px;")
+
+		div(class="row")
+				
+			// For Space Series Analysis
+			div(class="col-lg-12")
+				div(class="panel panel-info" id="s_panel")
+					div(class="panel-heading")
+						h3(class="panel-title") Geo Heat Map
+					div(class="panel-body")
+						div(id="worldmap" style="position: relative; height:520px;")
+
