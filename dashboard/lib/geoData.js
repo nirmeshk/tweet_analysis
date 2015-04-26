@@ -59,10 +59,18 @@ function processCountryUpdate(queries){
 	var c_hash = "country:" + country;
     rclient.hgetall( c_hash, function (err, obj) {
 	      if(obj != null){
+		  		if(obj.s_pos == null || obj.s_pos === undefined){
+					obj.s_pos = 0;
+				}
+		  		if(obj.s_neg == null || obj.s_neg === undefined){
+					obj.s_neg = 0;
+				}
+		  		if(obj.s_neu == null || obj.s_neu === undefined){
+					obj.s_neu = 0;
+				}
 	            country_json[obj.c_code] = obj;
 		   }
 		   processCountryUpdate(queries); 
-   
 	});
 }
 
