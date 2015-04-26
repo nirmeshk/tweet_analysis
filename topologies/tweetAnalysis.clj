@@ -64,18 +64,18 @@
           "bolts.geo_spatial_tweet_analysis.LocationTweetSentimentCount"
           [])
 
-      ;; Top-k Words
-;;      "tweet-split-and-filter-bolt" (python-bolt-spec
-;;          options
-;;          {"cleanup-bolt" :shuffle}
-;;          "bolts.tweet_count.SplitTweetAndFilter" 
-;;          ["words"])
+      ;;Top-k Words
+      "tweet-split-and-filter-bolt" (python-bolt-spec
+          options
+          {"cleanup-bolt" :shuffle}
+          "bolts.tweet_count.SplitTweetAndFilter" 
+          ["words"])
       
-;;      "top-k-bolt" (python-bolt-spec
-;;          options
-;;          {"tweet-split-and-filter-bolt" ["words"]}
-;;          "bolts.tweet_count.TopK"
-;;          [])
+      "top-k-bolt" (python-bolt-spec
+          options
+          {"tweet-split-and-filter-bolt" ["words"]}
+          "bolts.tweet_count.TopK"
+          [])
     }
   ]
 )

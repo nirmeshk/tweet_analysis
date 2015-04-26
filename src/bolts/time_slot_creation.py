@@ -24,8 +24,14 @@ class TimeSlotCreation(Bolt):
         ts = int(tweet['ts'])
         slot = getTimeSlot(ts , self.start_ts, self.duration)
         txt = tweet['txt']
+
+        redis_list = "cricinfo"
+
         # prepare hash to store in redis
         redis_hash = "time_slot:" + str(slot)
+
+        self.r.lrem(redis_list, -1, redis_hash)
+        self.r.lpush(redis_list, redis_hash)
 
         # Calculating start and time time of the slot
         end_time = self.start_ts + self.duration * slot
@@ -36,9 +42,6 @@ class TimeSlotCreation(Bolt):
         self.r.hset(redis_hash, "end_ts", end_time)
         self.r.hset(redis_hash, "str_ts", start_time)
         #self.r.hset(redis_hash, "t_count", 0)
-        self.r.hset(redis_hash, "s_pos", 0)
-        self.r.hset(redis_hash, "s_neg", 0)
-        self.r.hset(redis_hash, "s_neu", 0)
 
         self.emit( [slot, txt] )
         self.log( "%s: %s" % (slot, txt) )
