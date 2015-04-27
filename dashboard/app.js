@@ -14,12 +14,15 @@ var port = 3000;
 
 var geoData = require('./lib/geoData');
 var textData = require('./lib/textData');
+var wordData = require('./lib/wordData');
 //var timeseriesData = require('./lib/tsData');
 
 var gData = new geoData("dummy");
 gData.getCountryJson();
 
 var tData = new textData("dummy");
+
+var wData = new wordData("dummy");
 
 //var tsData = new timeSeriesData("dummy");
 //tsData.getTimeSeriesData();
@@ -61,7 +64,17 @@ sio.sockets.on('connection', function(socket){
          tData.getTextJson();
       }, 980
 	 );
+	
+	 // Tweet Words UI API Calls
+      setInterval(function(){
+         socket.emit('word-json', wData.getUpdatedWordJson());
+	      }, 3000
+      );
 
+	  setInterval(function(){
+	      wData.getWordJson();
+	     }, 2000
+	  );
 
 });
 
