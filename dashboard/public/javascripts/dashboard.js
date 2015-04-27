@@ -1,7 +1,7 @@
-var server_name = "http://127.0.0.1:3000/";
-var socket = io.connect(server_name);
-
 $(document).ready(function(){
+
+	var server_name = window.location.href;
+	var socket = io.connect(server_name);
 
 	var countries = getCountryTweetJson();
 	var colorFills = getColorFillJson();
@@ -24,6 +24,7 @@ $(document).ready(function(){
    });
 
 	map.legend();
+
 	socket.on('country-json', function(data) {
 		map.updateChoropleth(data);
 	});
@@ -32,6 +33,12 @@ $(document).ready(function(){
 		var countHtml = "<span style='font-weight: bold;color:#000066'> #" + data.count +": </span>";
 		var tweetHtml = "<span style='color:#3366FF'> " + data.text +"<span> <br/>";
 		$('#tweet_log').prepend(countHtml + tweetHtml);	
+	});
+
+
+	socket.on('word-json', function(data){
+		$("#w_cloud").html();
+		WordCloud(document.getElementById('w_cloud'), { list: data } );
 	});
 
 });

@@ -2,14 +2,14 @@
 class ReadProperties:
 
     def __init__(self):
-    	self.prop = {}
-        f = open("app-config.txt","r+")
-        for line in f:
-            key_value = line.split("=")
-            self.prop[key_value[0]] = key_value[1]
+    	self.properties = {}
+        with open("helper/app-config.txt","r") as file1:
+            for line in file1:
+                key_value = line.split("=")
+                self.properties[key_value[0]] = key_value[1]
 
     def getProperties(self):
-        return self.prop
+        return self.properties
 
 class ReadStopWords:
     def __init__(self):
