@@ -3,19 +3,18 @@ from __future__ import absolute_import, print_function, unicode_literals, divisi
 from streamparse.bolt import Bolt
 import redis
 import math
-#import helper.readproperties
+from helper.readproperties import ReadProperties
 
 class TimeSlotCreation(Bolt):
 
     def initialize(self, conf, ctx):
-        #config = ReadProperties()
-        #prop = config.getProperties
+        config = ReadProperties()
+        self.props = config.getProperties()
         # size of slot duration
-        self.duration = 5000
-        #self.duration = prop["slot_duration"]
+        self.duration = int(self.props['slot_duration'])
         # start time of slot
-        self.start_ts = 1427329782738
-        #self.start_ts = prop["ts_start"]
+        self.start_ts = int(self.props['ts_start'])
+            
         self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     def process(self, tup):
