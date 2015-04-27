@@ -41,7 +41,8 @@ wordData.prototype.getWordJson = function(){
 }
 
 wordData.prototype.getUpdatedWordJson = function(){
-	console.log(wordFreqArray);
+	
+	//console.log(wordFreqArray);
 	return wordFreqArray;	
 }
 
