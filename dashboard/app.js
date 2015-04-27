@@ -15,7 +15,7 @@ var port = 3000;
 var geoData = require('./lib/geoData');
 var textData = require('./lib/textData');
 var wordData = require('./lib/wordData');
-//var timeseriesData = require('./lib/tsData');
+var timeseriesData = require('./lib/timeseriesData');
 
 var gData = new geoData("dummy");
 gData.getCountryJson();
@@ -24,8 +24,7 @@ var tData = new textData("dummy");
 
 var wData = new wordData("dummy");
 
-//var tsData = new timeSeriesData("dummy");
-//tsData.getTimeSeriesData();
+var tseriesData = new timeseriesData("dummy");
 
 server.listen(3000);
 console.log("Socket.io server listening at http://127.0.0.1: " + port);
@@ -76,6 +75,16 @@ sio.sockets.on('connection', function(socket){
 	     }, 2000
 	  );
 
+	  // Time Series UI API Calls
+	  setInterval(function(){
+	   	  socket.emit('time-series-json', tseriesData.getUpdatedTimeSeriesJson());
+	     }, 400
+	  );
+
+	  setInterval(function(){ 
+	  	  tseriesData.getTimeSeriesJson();
+	   	  }, 400
+	  );
 });
 
 
