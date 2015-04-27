@@ -21,6 +21,10 @@ var tsJsonArray = {
 
 var slot_number =-1;
 
+var summaryJson = {};
+summaryJson.t_count = 0;
+summaryJson.s_pos = 0;
+summaryJson.s_neg = 0;
 
 timeseriesData.prototype.getTimeSeriesJson = function(){
 	
@@ -38,16 +42,26 @@ timeseriesData.prototype.getTimeSeriesJson = function(){
                     	    jsonData['count'] = Number(0);
 	                    else
     	                    jsonData['count'] = Number(slot_info.t_count);
+						
+						//Summary Stats
+						summaryJson.t_count += jsonData['count'];
 
         	            if(slot_info.s_neg == null || slot_info.s_neg === undefined)
             	            jsonData['negative'] = Number(0);
                 	    else
                     	    jsonData['negative'] = Number(slot_info.s_neg);
 
+						//Summary Stats
+						summaryJson.s_neg += jsonData['negative'];
+
 	                    if(slot_info.s_pos == null || slot_info.s_pos === undefined)
     	                    jsonData['positive'] = Number(0);
         	            else
             	            jsonData['positive'] = Number(slot_info.s_pos);
+
+						
+						//Summary Stats
+						summaryJson.s_pos += jsonData['positive'];
 
                     tsJsonArray.tweets.push(jsonData);
                 
@@ -64,6 +78,13 @@ timeseriesData.prototype.getUpdatedTimeSeriesJson = function(){
 	
 	//console.log(wordFreqArray);
 	return tsJsonArray;	
+}
+
+
+timeseriesData.prototype.getSummaryJson = function(){
+	
+	//console.log(wordFreqArray);
+	return summaryJson;	
 }
 
 function getTime(unix_timestamp){

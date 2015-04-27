@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+.summary_keys{
+	font-weight: bold;
+	color:#000066;
+	font-size:30px;
+	width:100px;
+}
+
+.summary_vals{
+	color:#3366FF;
+	font-size:30px;
+}
+

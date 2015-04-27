@@ -123,6 +123,15 @@ $(document).ready(function(){
 	    updateTimeSeriesPlot(data, dataset);
 	});
 
+	// Updating Tweets Summary data as per time-series
+	socket.on('summary-json', function(data){
+		var countHtml = "<span class='summary_keys'> Total Tweets: </span> <span class='summary_vals'> " + data.t_count +"<span> <br/>";
+		var posHtml = "<span class='summary_keys'> Positive Tweets: </span> <span class='summary_vals'> " + data.s_pos +"<span> <br/>";
+		var negHtml = "<span class='summary_keys'> Negative Tweets: </span> <span class='summary_vals'> " + data.s_neg +"<span> <br/>";
+		$('#tweet_analysis').html("<br/>" + countHtml + posHtml + negHtml);	
+	});
+
+
 });
 
 

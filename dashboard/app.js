@@ -85,6 +85,14 @@ sio.sockets.on('connection', function(socket){
 	  	  tseriesData.getTimeSeriesJson();
 	   	  }, 400
 	  );
+
+	  //Summary Analytics UI API Calls
+
+	  setInterval(function(){
+	   	  socket.emit('summary-json', tseriesData.getSummaryJson());
+	     }, 400
+	  );
+
 });
 
 
