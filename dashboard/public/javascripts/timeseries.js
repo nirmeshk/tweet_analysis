@@ -1,12 +1,22 @@
 var incr = 0;
 
 function updateTimeSeriesPlot(results, dataset) {
+	if(results == null || results.tweets == null || results.tweets === undefined){
+		return;
+	}
+
+	if(dataset === undefined){
+		return;
+	}
     // add a new data point to the dataset
     var now = vis.moment();
 
     //console.log("addDataPoint: " + now);
 
     var JSONLength = Object.keys(results.tweets).length;
+	if(JSONLength <= 0){
+		return;
+	}
     //var now = Date {Sat Apr 15 2015 01:54:43 GMT-0400 (EDT)};
     dataset.add({
         x: results.tweets[JSONLength-1].slot,
