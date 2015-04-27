@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 
 	var server_name = window.location.href;
@@ -25,6 +24,7 @@ $(document).ready(function(){
    });
 
 	map.legend();
+
 	socket.on('country-json', function(data) {
 		map.updateChoropleth(data);
 	});
@@ -33,6 +33,12 @@ $(document).ready(function(){
 		var countHtml = "<span style='font-weight: bold;color:#000066'> #" + data.count +": </span>";
 		var tweetHtml = "<span style='color:#3366FF'> " + data.text +"<span> <br/>";
 		$('#tweet_log').prepend(countHtml + tweetHtml);	
+	});
+
+
+	socket.on('word-json', function(data){
+		$("#w_cloud").html();
+		WordCloud(document.getElementById('w_cloud'), { list: data } );
 	});
 
 });
