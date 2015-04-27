@@ -72,7 +72,7 @@ class TopK(Bolt):
         if self.r.zcount("top-k", "-inf", "+inf") < self.k:
             self.r.zadd("top-k", word, self.sketch.get(word))
         else:
-            w, freq = self.r.zrange("top-k", -1, -1, withscores= True)[0]
+            w, freq = self.r.zrange("top-k", 0, 0, withscores= True)[0]
 
             #If word freq is higher than least freq of top-k list
             #Replace the word by current word
