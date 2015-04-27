@@ -1,5 +1,5 @@
 apt-get update 
-apt-get install build-essential
+apt-get install build-essential -y
 
 echo "Installing Pip, wget .."
 apt-get install python-pip -y
@@ -26,7 +26,7 @@ echo "Installing MongoDB.."
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 apt-get update
-apt-get install -y mongodb-org
+apt-get install mongodb-org -y
 
 echo "Install Redis...."
 cd ~
@@ -53,8 +53,8 @@ mongoimport --db twitterstream --collection cwctweets --file data/cwctweets.json
 
 echo "Installing Nodejs.."
 cd
-apt-get install curl
+apt-get install curl -y
 curl -sL https://deb.nodesource.com/setup | bash -
-apt-get install nodejs
+apt-get install nodejs -y
 cd tweet_analysis/dashboard/
 npm install
