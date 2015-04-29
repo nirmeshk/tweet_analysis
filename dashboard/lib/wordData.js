@@ -23,7 +23,7 @@ wordData.prototype.getWordJson = function(){
 	    if(err) throw err;
         members.forEach(function(member, index){
 			if(index % 2 == 1){
-				scoreArray.push(Math.floor(Math.sqrt(member) + (100 *Math.random())));
+				scoreArray.push(Math.floor(Math.sqrt(member)));
 			}else{
 				wordArray.push(member);
 			}

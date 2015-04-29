@@ -56,13 +56,13 @@ $(document).ready(function(){
     var options = {
       defaultGroup: 'ungrouped',
       legend: true,
-      start: vis.moment(1427329087738).add(100, 'seconds'), // Start Time Stamp Hard Coded
+      start: vis.moment(1427326200000).add(100, 'seconds'), // Start Time Stamp Hard Coded
       //start: vis.moment('Sun Mar 26 2015 21:30:00 GMT-0400').add(-30, 'seconds'), // changed so its faster
       end: vis.moment(1427329487738),  //End Time Stamp hard coded
       dataAxis: {
         customRange: {
           left: {
-            min:0, max: 50
+            min:0, max: 10000
           }
         }
       }

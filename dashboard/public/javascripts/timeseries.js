@@ -50,7 +50,7 @@ function updateTimeSeriesPlot(results, dataset) {
 function renderInitialPlot() {
     // move the window (you can think of different strategies).
     var now = 1427329787738 + incr; // Currest TS Hard coded
-	incr += 1100;
+	incr += 6600;
     
 	//console.log("renderStep: " + now);
     var range = graph2d.getWindow();

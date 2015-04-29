@@ -34,7 +34,7 @@ timeseriesData.prototype.getTimeSeriesJson = function(){
         replies.forEach(function (reply, i) {
                 rclient2.hgetall(reply, function(err,slot_info){
 	                if(slot_info != null){
-    	                //console.log("Slot: "+ slot_info.slot_no);
+    	                console.log(slot_info);
         	            var jsonData = {};
             	        jsonData['slot'] = Number(slot_info.end_ts);
 

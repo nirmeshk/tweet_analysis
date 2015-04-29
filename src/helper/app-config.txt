@@ -1,2 +1,2 @@
-slot_duration=5000
+slot_duration=600000
 ts_start=1427329782738
