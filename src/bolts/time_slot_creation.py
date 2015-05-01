@@ -6,29 +6,33 @@ import math
 from helper.readproperties import ReadProperties
 
 class TimeSlotCreation(Bolt):
-
+""" This bolt generates time slots for the tweets ans stores the hash into the redis store"""
     def initialize(self, conf, ctx):
+        # Getting the prperties file as a dictionary
         config = ReadProperties()
         self.props = config.getProperties()
         # size of slot duration
         self.duration = int(self.props['slot_duration'])
         # start time of slot
         self.start_ts = int(self.props['ts_start'])
-            
+        # Initialize redis client
         self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     def process(self, tup):
         tweet = tup.values[0]
         # get time stamp value
-        ts = int(tweet['ts'])
+        ts = int(tweet['ts']
+        # Getting the time slot number based on the tweets current timestamp
         slot = getTimeSlot(ts , self.start_ts, self.duration)
         txt = tweet['txt']
 
+        # Creating a list of all timeslots and storing into redis store
         redis_list = "cricinfo"
 
         # prepare hash to store in redis
         redis_hash = "time_slot:" + str(slot)
 
+        # All the timeslot to the list, delete if already exists and add again
         self.r.lrem(redis_list, -1, redis_hash)
         self.r.lpush(redis_list, redis_hash)
 
@@ -46,6 +50,7 @@ class TimeSlotCreation(Bolt):
         self.log( "%s: %s" % (slot, txt) )
 
 def getTimeSlot(ts, start_ts, duration):
+    # Generates a slot number based on the timestamp and duration
     return( (ts - start_ts) // duration + 1 )
         
         
