@@ -29,9 +29,9 @@ class SplitTweetAndFilter(Bolt):
         self.stop_words = sw.getStopWords()
 
     def process(self, tup):
-        tweet = tup.values[0]
-        txt = tweet['txt']
 
+        txt = tup.values[0]
+        
         #Filter stop words
         words = txt.split(' ')
         filtered_words = []
@@ -64,7 +64,7 @@ class TopK(Bolt):
 
     def process(self, tup):
         word = tup.values[0]
-        self.log("Topk: %s" % word)
+        #self.log("Topk: %s" % word)
         #Add the word to count min sketch sketch.
         self.sketch.update(word, 1)
 

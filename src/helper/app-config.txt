@@ -1,2 +1,3 @@
 slot_duration=600000
 ts_start=1427329782738
+batch_size=5000

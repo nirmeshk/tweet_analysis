@@ -8,19 +8,24 @@ class TextCleanup(Bolt):
 
     def initialize(self, conf, ctx):
         self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
-        pass
 
     def process(self, tup):
-        tweet = tup.values[0]
-        
-        # Storing tweets into redis list
-        self.r.rpush("Tweets", tweet['txt'])
+        #["txt", "ts", "tz", "c_code"]
+        txt = tup.values[0].encode('utf-8')
+        ts = tup.values[1]
+        tz = tup.values[2]
+        c_code = tup.values[3]
 
-        txt = tweet['txt'].encode('utf-8') 
+        #Storing tweets into redis list
+        self.r.rpush("Tweets", txt)
         #replace non alphanumeric characters
         txt = re.sub(r'[^A-Za-z0-9 ]', '', txt)
-        #suppress multiple spaces to single space 
+        ###suppress multiple spaces to single space 
         txt = txt.strip()
         txt = re.sub('\s+', ' ', txt)
-        tweet['txt'] = txt.lower()
-        self.emit([tweet])
+        txt = txt.lower()
+        #Remove links and url from the tweet text
+        txt = re.sub('(http)\w+', '', txt)
+        txt = re.sub('(www)\w+', '', txt)
+
+        self.emit([txt, ts, tz, c_code])

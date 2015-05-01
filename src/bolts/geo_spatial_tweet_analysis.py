@@ -16,19 +16,18 @@ class FiltertMissingLocation(Bolt):
         pass
 
     def process(self, tup):
-        tweet = tup.values[0]
+        txt = tup.values[0].encode('utf-8')
+        ts = tup.values[1]
+        tz = tup.values[2]
+        c_code = tup.values[3]
 
         # Emit only if country code and txt is present in tweet
-        if ("c_code" in tweet) and ("txt" in tweet):
-            txt = tweet['txt']
-            country_code = tweet['c_code']
-            self.emit([country_code, txt])
-        elif ("tz" in tweet) and ("txt" in tweet):
+        if c_code and txt:
+            self.emit([c_code, txt])
+        elif tz and txt:
             try:
-                txt = tweet['txt']
-                timezone = tweet['tz']
-                country_code = self.timezone_countries[str(timezone)]
-                self.emit([country_code, txt])
+                c_code = self.timezone_countries[str(tz)]
+                self.emit([c_code, txt])
             except KeyError:
                 pass
 

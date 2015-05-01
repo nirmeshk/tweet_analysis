@@ -18,11 +18,14 @@ class TimeSlotCreation(Bolt):
         self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     def process(self, tup):
-        tweet = tup.values[0]
+        txt = tup.values[0]
+        ts = int(tup.values[1])
+        tz = tup.values[2]
+        c_code = tup.values[3]
+
+
         # get time stamp value
-        ts = int(tweet['ts'])
         slot = getTimeSlot(ts , self.start_ts, self.duration)
-        txt = tweet['txt']
 
         redis_list = "cricinfo"
 
