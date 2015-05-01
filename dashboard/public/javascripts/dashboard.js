@@ -52,7 +52,8 @@ $(document).ready(function(){
                 orientation: 'bottom' // top, bottom
             }
         }});
-	
+
+	// Initializing configuration for vis.js timeseries map
     var options = {
       defaultGroup: 'ungrouped',
       legend: true,
@@ -62,7 +63,7 @@ $(document).ready(function(){
       dataAxis: {
         customRange: {
           left: {
-            min:0, max: 10000
+            min:0, max: 20000 // For y axis range
           }
         }
       }
@@ -84,7 +85,8 @@ $(document).ready(function(){
 							fills : colorFills ,
 							data : countries,
 					        geographyConfig: {
-					            popupTemplate: function(geo, data) {
+					            popupTemplate: function(geo, data) { 
+									// For Rendering on Hover over the countries
 					                return ['<div class="hoverinfo"><strong>',
                     					    ' ' + geo.properties.name,
 					                        '<br/> Tweets: ' + data.t_count ,
