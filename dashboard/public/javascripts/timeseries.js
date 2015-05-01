@@ -1,6 +1,8 @@
 var incr = 0;
 
+//Function to update timeseries plot incrementally with time
 function updateTimeSeriesPlot(results, dataset) {
+	//Null checks
 	if(results == null || results.tweets == null || results.tweets === undefined){
 		return;
 	}
@@ -46,7 +48,7 @@ function updateTimeSeriesPlot(results, dataset) {
     });
 }
 
-
+// Function to render the initial plot, when the UI is loaded
 function renderInitialPlot() {
     // move the window (you can think of different strategies).
     var now = 1427329787738 + incr; // Currest TS Hard coded

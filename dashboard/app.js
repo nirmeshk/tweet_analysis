@@ -12,11 +12,20 @@ var app = express();
 var server = require('http').createServer(app);
 var port = 3000;
 
+// Loading Geo Data Analysis helper lib
 var geoData = require('./lib/geoData');
+
+// Loading Text Data Analysis helper lib
 var textData = require('./lib/textData');
+
+// Loading Data Analysis helper lib
 var wordData = require('./lib/wordData');
+
+// Loading Timeseries Data Analysis helper lib
 var timeseriesData = require('./lib/timeseriesData');
 
+//Initializing Handlers of above library
+// Dummy arguments are reserved for future purpose
 var gData = new geoData("dummy");
 gData.getCountryJson();
 
@@ -48,6 +57,7 @@ sio.sockets.on('connection', function(socket){
       }, 4000+Math.round(100*Math.random())
      );
 
+	// Geo-space Redis Fetch
      setInterval(function(){
          gData.getCountryJson();
       }, 2000+Math.round(100*Math.random())
@@ -59,6 +69,7 @@ sio.sockets.on('connection', function(socket){
       }, 1000
      );
 
+	// Text data Redis Fetch
      setInterval(function(){
          tData.getTextJson();
       }, 980
@@ -67,12 +78,13 @@ sio.sockets.on('connection', function(socket){
 	 // Tweet Words UI API Calls
       setInterval(function(){
          socket.emit('word-json', wData.getUpdatedWordJson());
-	      }, 3000
+	      }, 6000
       );
 
+	//Top-K words Redis Fetch
 	  setInterval(function(){
 	      wData.getWordJson();
-	     }, 2000
+	     }, 3000
 	  );
 
 	  // Time Series UI API Calls
@@ -81,13 +93,13 @@ sio.sockets.on('connection', function(socket){
 	     }, 400
 	  );
 
+      // Timeseries Data Redis Fetch
 	  setInterval(function(){ 
 	  	  tseriesData.getTimeSeriesJson();
 	   	  }, 400
 	  );
 
 	  //Summary Analytics UI API Calls
-
 	  setInterval(function(){
 	   	  socket.emit('summary-json', tseriesData.getSummaryJson());
 	     }, 400

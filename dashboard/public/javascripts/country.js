@@ -1,3 +1,4 @@
+// Initializing country- alpha3 codes
 var country = ['DZA', 'AGO', 'EGY', 'BGD', 'NER', 'LIE', 'NAM', 'BGR', 'BOL', 'GHA',
 'CCK', 'PAK', 'CPV', 'JOR', 'LBR', 'LBY', 'MYS', 'IOT', 'PRI', 'MYT',
 'PRK', 'PSE', 'TZA', 'BWA', 'KHM', 'UMI', 'TTO', 'PRY', 'HKG', 'SAU',
@@ -24,6 +25,7 @@ var country = ['DZA', 'AGO', 'EGY', 'BGD', 'NER', 'LIE', 'NAM', 'BGR', 'BOL', 'G
 'SLE', 'PAN', 'SDN', 'SLB', 'NZL', 'MCO', 'ITA', 'JPN', 'KGZ', 'UGA',
 'NCL', 'PNG', 'ARG', 'SWE', 'BHS', 'BHR', 'ARM', 'NRU', 'CUB'];
 
+// Creating Initial Json to load Map of countries
 function getCountryTweetJson(){
 		
 	var country_tweet = {};
@@ -34,11 +36,12 @@ function getCountryTweetJson(){
 	return country_tweet;
 }
 
-//var heatColors = ["#ffffe6", "#ffffb3", "#ffff80", "#ffff4d", "#ffff19", 
+// Initializing heat map colors
 var heatColors = [ "#ffff4d","#ffff19","#ffdb00", "#ffc800", "#ffb600","#ffa400", "#ff9200", "#ff8000", "#ff6d00", 
 				  "#ff5b00", "#ff4900", "#ff3700", "#ff2400"];
 
 
+// Initializing json for coloring the map, with default and other heatmap colors
 function getColorFillJson(){
 		
 	var colorFill = {};

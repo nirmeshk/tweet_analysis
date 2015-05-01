@@ -10,6 +10,7 @@ class FiltertMissingLocation(Bolt):
     """ This Bolt will filter out all the tweets where location is absent"""
 
     def initialize(self, conf, ctx):
+        # Generating a reverse mapping of the timezone to country
         self.timezone_countries = {str(timezone).split('/')[1]: str(country)
                           for country, timezones in country_timezones.iteritems()
                           for timezone in timezones}
@@ -36,9 +37,11 @@ class LocationTweetCount(Bolt):
     """ This Bolt will count the number of tweets received based on country"""
 
     def initialize(self, conf, ctx):
+        # Initialize redis client
         self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     def process(self, tup):
+        # Converting alpha-2 country codes to alpha-3 
         country_code = countries.get(tup.values[0]).alpha3
         txt = tup.values[1]
 
@@ -53,14 +56,17 @@ class LocationTweetSentimentCount(Bolt):
     """ This Bolt will count the number of positive/neagtive/neutral sentiment tweets received based on country"""
 
     def initialize(self, conf, ctx):
+        # Initialize redis client
         self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     def process(self, tup):
+        # Converting alpha-2 country codes to alpha-3 
         country_code = countries.get(tup.values[0]).alpha3
         txt = tup.values[1]
 
         redis_hash = "country:" + country_code
 
+        # Getting the polarity of the tweet text
         tweet_sent = TextBlob(txt)
         polarity = tweet_sent.sentiment.polarity
         if polarity > 0:

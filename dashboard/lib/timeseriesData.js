@@ -6,30 +6,37 @@ rclient2 = redis.createClient();
 
 var dummy;
 
+// Initializing class handler
 var timeseriesData = function(dummy){
     this.dummy = dummy;
 }
 
+//Redis client on error callback
 rclient1.on('error', function(err){
     console.log('Error' + err);
 	 exit(1);
 });
 
+//Initalizing timeseries json array
 var tsJsonArray = {
     tweets : []
 };
 
+//Initalizing slot number
 var slot_number =-1;
 
+//Initalizing summary Json for summary analytics wrt timeseries data
 var summaryJson = {};
 summaryJson.t_count = 0;
 summaryJson.s_pos = 0;
 summaryJson.s_neg = 0;
 
+//Getting timeseries data from redis, and storing in local JSON
 timeseriesData.prototype.getTimeSeriesJson = function(){
 	
 	slot_number = slot_number + 1;
 
+	//Fetching sorted slot numbers from redis 
     rclient1.sort("cricinfo", "by", "*->slot_no","limit", slot_number, 1, function(err,replies){
         replies.forEach(function (reply, i) {
                 rclient2.hgetall(reply, function(err,slot_info){
@@ -74,6 +81,7 @@ timeseriesData.prototype.getTimeSeriesJson = function(){
     });
 }
 
+//Function to get updated timeseries json for UI display
 timeseriesData.prototype.getUpdatedTimeSeriesJson = function(){
 	
 	//console.log(wordFreqArray);
@@ -81,12 +89,14 @@ timeseriesData.prototype.getUpdatedTimeSeriesJson = function(){
 }
 
 
+//Function to get updated Summary json for UI display
 timeseriesData.prototype.getSummaryJson = function(){
 	
 	//console.log(wordFreqArray);
 	return summaryJson;	
 }
 
+//Helper function, to get time from unix timestamp
 function getTime(unix_timestamp){
     var time_int = parseInt(unix_timestamp);
 

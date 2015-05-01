@@ -9,6 +9,7 @@ class TweetCount(Bolt):
     """ This Bolt will count the number of tweets received in particular time slot and store it in hash data structure in Redis"""
 
     def initialize(self, conf, ctx):
+    	#Initialize redis client
         self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     def process(self, tup):
@@ -25,6 +26,7 @@ class SplitTweetAndFilter(Bolt):
     """ This Bolt will split the sentence and remove all the stop-words"""
 
     def initialize(self, conf, ctx):
+    	# reading stopwords from a stopwords list
         sw = ReadStopWords()
         self.stop_words = sw.getStopWords()
 
@@ -55,11 +57,11 @@ class TopK(Bolt):
     """
 
     def initialize(self, conf, ctx):
-        #pass
+        # Initialize redis client
         self.r = redis.Redis(host='localhost', port=6379, db=0)
         self.k = 50 #k value for topK
         
-        #Initialize count Min Sketch
+        #Initialize count Min Sketch with default delta and epsilon values
         self.sketch = Sketch(10**-7, 0.005, self.k)
 
     def process(self, tup):
