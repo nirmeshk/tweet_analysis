@@ -5,7 +5,7 @@ import re
 import redis
 
 class TextCleanup(Bolt):
-""" This bolt takes the tweet text and removes junk characters, converts text to lowercase and transforms it into utf-8 encoding """
+    """ This bolt takes the tweet text and removes junk characters, converts text to lowercase and transforms it into utf-8 encoding """
 
     def initialize(self, conf, ctx):
         self.r = redis.StrictRedis(host='localhost', port=6379, db=0)

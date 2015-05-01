@@ -6,7 +6,7 @@ import math
 from helper.readproperties import ReadProperties
 
 class TimeSlotCreation(Bolt):
-""" This bolt generates time slots for the tweets ans stores the hash into the redis store"""
+    """ This bolt generates time slots for the tweets ans stores the hash into the redis store"""
     def initialize(self, conf, ctx):
         # Getting the prperties file as a dictionary
         config = ReadProperties()
@@ -21,7 +21,7 @@ class TimeSlotCreation(Bolt):
     def process(self, tup):
         tweet = tup.values[0]
         # get time stamp value
-        ts = int(tweet['ts']
+        ts = int(tweet['ts'])
         # Getting the time slot number based on the tweets current timestamp
         slot = getTimeSlot(ts , self.start_ts, self.duration)
         txt = tweet['txt']

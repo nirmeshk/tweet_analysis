@@ -1,6 +1,6 @@
 
 class ReadProperties:
-""" This class read the properties file and generates a dictionary from the key value pairs """
+    """ This class read the properties file and generates a dictionary from the key value pairs """
 
     def __init__(self):
         # Initialize an empty dictionary and read the properties file
@@ -14,7 +14,7 @@ class ReadProperties:
         return self.properties
 
 class ReadStopWords:
-""" This class read a stop-words file and appends them into a list """
+    """ This class read a stop-words file and appends them into a list """
     def __init__(self):
         self.stop_words = []
         with open("helper/stop-words.txt", 'r') as f:
