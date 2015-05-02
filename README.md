@@ -9,7 +9,7 @@ OS: Ubuntu 14.04 Base Image from VCL.
 - Once the vcl instance is ready, download the tweet_analysis/ folder inside $HOME.
 - Run `sudo sh setup.sh` inside project folder. This will install all the required programs for running the project. 
 - Now we need to start storm topology and submit the job. Run `sparse run -t 200` inside project folder. This will automatically start storm instance and submit the topology to storm. `-t` option is used for specifying the run time for topology. So the above command will ensure that topology runs for 200 seconds. 
-- Now start the live dashboard by running 
+- In a separate tab, start the live dashboard by running 
   
    ```
    1. cd dashboard/
@@ -90,13 +90,15 @@ OS: Ubuntu 14.04 Base Image from VCL.
 
 #### Data Format for Redis storage
 
-##### Time Series
 - Using [hash](http://redis.io/commands/hincrby) data structure of redis. 
 - Hash key will be of format `time_slot:12` , `time_slot:27` ; where 12 and 27 and bin numbers.
 - A hash has multiple "fields" which we will use to store summary for particular bin.
+  ##### Time Series
   - `tweet_count`: count of tweets received in this particular slot
   - `s_pos` : positive sentiment count in this bin 
   - `s_neg` : negative sentiment count in this bin 
+
+
 
 References:
 
