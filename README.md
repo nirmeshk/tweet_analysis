@@ -117,7 +117,7 @@ OS: Ubuntu 14.04 Base Image from VCL.
 
 - Run `$ sparse run` in order to run the topology on local.
 
-References:
+##References:
 
 [1] [Stream Parse](https://github.com/Parsely/streamparse) for easy integration on Python with Storm.
 
