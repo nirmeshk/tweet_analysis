@@ -15,6 +15,7 @@ mv lein /bin/
 chmod a+x /bin/lein
 env LEIN_ROOT=yes
 yes | lein -version
+lein
 
 apt-get install python-dev -y > installation.log
 
