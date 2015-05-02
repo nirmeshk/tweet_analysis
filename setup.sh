@@ -48,7 +48,7 @@ cd ~/tweet_analysis/
 pip install -r requirements.txt > installation.log
 
 echo "[INFO] Downloading data from our public repository"
-wget https://dl.dropboxusercontent.com/u/25947865/cwcTweets.json
+wget "https://dl.dropboxusercontent.com/u/25947865/cwcTweets.json"
 mkdir data
 mv cwcTweets.json data/
 
@@ -56,7 +56,7 @@ echo "[INFO] Data Downloaded Successfully "
 sleep 1
 
 echo "[INFO] Importing data into mongodb..."
-mongoimport --db twitterstream --collection cwctweets --file data/cwctweets.json
+mongoimport --db twitterstream --collection cwctweets --file data/cwcTweets.json
 
 
 echo "[INFO] Installing Nodejs.."
