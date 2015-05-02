@@ -49,6 +49,7 @@ pip install -r requirements.txt > installation.log
 
 echo "[INFO] Downloading data from our public repository"
 wget https://dl.dropboxusercontent.com/u/25947865/cwcTweets.json
+mkdir data
 mv cwcTweets.json data/
 
 echo "[INFO] Data Downloaded Successfully "
