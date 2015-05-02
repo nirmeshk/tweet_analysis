@@ -90,15 +90,27 @@ OS: Ubuntu 14.04 Base Image from VCL.
 
 #### Data Format for Redis storage
 
+##### Time Series
 - Using [hash](http://redis.io/commands/hincrby) data structure of redis. 
-- Hash key will be of format `time_slot:12` , `time_slot:27` ; where 12 and 27 and bin numbers.
+- Hash key will be of format `time_slot:12` , `time_slot:27` ; where 12 and 27 are bin numbers.
 - A hash has multiple "fields" which we will use to store summary for particular bin.
-  ##### Time Series
-  - `tweet_count`: count of tweets received in this particular slot
+  - `slot_no`: current time slot number
+  - `t_count`: count of tweets received in this particular slot
   - `s_pos` : positive sentiment count in this bin 
-  - `s_neg` : negative sentiment count in this bin 
+  - `s_neg` : negative sentiment count in this bin
+  - `s_neu` : neutral sentiment count in this bin
+  - `start_ts` : current time slot start timestamp
+  - `end_ts` :  current time slot end timestamp
 
-
+#### GeoSpatial
+- Using [hash](http://redis.io/commands/hincrby) data structure of redis. 
+- Hash key will be of format `country:AUS` , `country:IND` ; where AUS and IND are alpha-3 country codes.
+- A hash has multiple "fields" which we will use to store summary for particular bin.
+  - `t_count`: count of tweets received in this particular slot
+  - `s_pos` : positive sentiment count in this bin 
+  - `s_neg` : negative sentiment count in this bin
+  - `s_neu` : neutral sentiment count in this bin
+  - `c_code` : current hash country code
 
 References:
 
