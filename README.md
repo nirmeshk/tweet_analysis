@@ -78,7 +78,7 @@ OS: Ubuntu 14.04 Base Image from VCL.
 
 - Install dependencies of Python
   ```
-  $ cd tweet_analysis_v1`
+  $ cd tweet_analysis`
   $ sudo pip install -r requirements.txt
   $python2 -m textblob.download_corpora 
   ```
@@ -95,8 +95,8 @@ OS: Ubuntu 14.04 Base Image from VCL.
 - Hash key will be of format `time_slot:12` , `time_slot:27` ; where 12 and 27 and bin numbers.
 - A hash has multiple "fields" which we will use to store summary for particular bin.
   - `tweet_count`: count of tweets received in this particular slot
-  - `sentiment_pos` : positive sentiment count in this bin 
-  - `sentiment_neg` : negative sentiment count in this bin 
+  - `s_pos` : positive sentiment count in this bin 
+  - `s_neg` : negative sentiment count in this bin 
 
 References:
 
