@@ -24,7 +24,7 @@ pip install streamparse > installation.log
 # Install MongoDB
 echo "[INFO] Installing MongoDB..."
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 > installation.log
-echo "[INFO] deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list > installation.log
+echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list > installation.log
 apt-get update > installation.log
 apt-get install mongodb-org -y > installation.log
 
