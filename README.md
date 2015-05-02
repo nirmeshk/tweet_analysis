@@ -50,6 +50,36 @@ OS: Ubuntu 14.04 Base Image from VCL.
 - **Location Based tweet Count:** Count number of tweets received in particular country.
 
 
+#### Data Format for Redis storage
+
+##### Time Series
+- Using [hash](http://redis.io/commands/hincrby) data structure of redis. 
+- Hash key will be of format `time_slot:12` , `time_slot:27` ; where 12 and 27 are bin numbers.
+- A hash has multiple "fields" which we will use to store summary for particular bin.
+  - `slot_no`: current time slot number
+  - `t_count`: count of tweets received in this particular slot
+  - `s_pos` : positive sentiment count in this bin 
+  - `s_neg` : negative sentiment count in this bin
+  - `s_neu` : neutral sentiment count in this bin
+  - `start_ts` : current time slot start timestamp
+  - `end_ts` :  current time slot end timestamp
+
+##### Geo-Spatial
+- Using [hash](http://redis.io/commands/hincrby) data structure of redis. 
+- Hash key will be of format `country:AUS` , `country:IND` ; where AUS and IND are alpha-3 country codes.
+- A hash has multiple "fields" which we will use to store summary for particular country's tweets information.
+  - `t_count`: count of tweets received in this particular slot
+  - `s_pos` : positive sentiment count in this bin 
+  - `s_neg` : negative sentiment count in this bin
+  - `s_neu` : neutral sentiment count in this bin
+  - `c_code` : current hash country code
+
+##### Top-K
+- Using [set](http://redis.io/commands#set) data structure of redis.
+- Set name used to store the top-k words is `top-k`
+- A set have a unique list of most trending words
+
+
 ####Individual Installation instructions(In case you want to manually install all the dependencies)
 
 - JDK 7+, which you can install with apt-get, homebrew, or an installler; and
@@ -87,38 +117,10 @@ OS: Ubuntu 14.04 Base Image from VCL.
 
 - Run `$ sparse run` in order to run the topology on local.
 
-
-#### Data Format for Redis storage
-
-##### Time Series
-- Using [hash](http://redis.io/commands/hincrby) data structure of redis. 
-- Hash key will be of format `time_slot:12` , `time_slot:27` ; where 12 and 27 are bin numbers.
-- A hash has multiple "fields" which we will use to store summary for particular bin.
-  - `slot_no`: current time slot number
-  - `t_count`: count of tweets received in this particular slot
-  - `s_pos` : positive sentiment count in this bin 
-  - `s_neg` : negative sentiment count in this bin
-  - `s_neu` : neutral sentiment count in this bin
-  - `start_ts` : current time slot start timestamp
-  - `end_ts` :  current time slot end timestamp
-
-##### Geo-Spatial
-- Using [hash](http://redis.io/commands/hincrby) data structure of redis. 
-- Hash key will be of format `country:AUS` , `country:IND` ; where AUS and IND are alpha-3 country codes.
-- A hash has multiple "fields" which we will use to store summary for particular country's tweets information.
-  - `t_count`: count of tweets received in this particular slot
-  - `s_pos` : positive sentiment count in this bin 
-  - `s_neg` : negative sentiment count in this bin
-  - `s_neu` : neutral sentiment count in this bin
-  - `c_code` : current hash country code
-
-##### Top-K
-- Using [set](http://redis.io/commands#set) data structure of redis.
-- Set name used to store the top-k words is `top-k`
-- A set have a unique list of most trending words
-
-References:
+##References:
 
 [1] [Stream Parse](https://github.com/Parsely/streamparse) for easy integration on Python with Storm.
 
 [2] [Virtual Env] (https://virtualenv.pypa.io/en/latest/) tool to create isolate environment for python project.
+
+[3] [CountMin Sketch Implementation for Python](https://tech.shareaholic.com/2012/12/03/the-count-min-sketch-how-to-count-over-large-keyspaces-when-about-right-is-good-enough/)
