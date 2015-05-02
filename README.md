@@ -38,6 +38,18 @@ OS: Ubuntu 14.04 Base Image from VCL.
 
 ####Storm Topology details:
 
+![Storm topology DAG](storm_dag.jpg)
+
+- **MongoDB Spout:** Reads data from MongoDb and emits the data in form of stream.
+- **Clean Up Bolt:** Performs basic text cleanup operations on tweet text.
+- **Split And Filter Bolt:** Split the tweet text into words and remove the stop words.
+- **TopK Bolt:** Maintain a CountMin Sketch in order to calculate Top-k words.
+- **Time Slot Creation Bolt:** Performs Binning on timestamp in order to perform time series analysis.
+- **Location Filter Bolt:** Filter the tweets based on country code. In a large proportion of data, country was not available. We try to extract the location using time zone in such cases.
+- **Time based Tweet Count Bolt:** Count number of tweets received in particular time slot bin.
+- **Location Based tweet Count:** Count number of tweets received in particular country.
+
+
 ####Individual Installation instructions(In case you want to manually install all the dependencies)
 
 - JDK 7+, which you can install with apt-get, homebrew, or an installler; and
