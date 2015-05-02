@@ -112,6 +112,11 @@ OS: Ubuntu 14.04 Base Image from VCL.
   - `s_neu` : neutral sentiment count in this bin
   - `c_code` : current hash country code
 
+##### Top-K
+- Using [set](http://redis.io/commands#set) data structure of redis.
+- Set name used to store the top-k words is `top-k`
+- A set have a unique list of most trending words
+
 References:
 
 [1] [Stream Parse](https://github.com/Parsely/streamparse) for easy integration on Python with Storm.
