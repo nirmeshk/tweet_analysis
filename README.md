@@ -102,10 +102,10 @@ OS: Ubuntu 14.04 Base Image from VCL.
   - `start_ts` : current time slot start timestamp
   - `end_ts` :  current time slot end timestamp
 
-#### GeoSpatial
+##### Geo-Spatial
 - Using [hash](http://redis.io/commands/hincrby) data structure of redis. 
 - Hash key will be of format `country:AUS` , `country:IND` ; where AUS and IND are alpha-3 country codes.
-- A hash has multiple "fields" which we will use to store summary for particular bin.
+- A hash has multiple "fields" which we will use to store summary for particular country's tweets information.
   - `t_count`: count of tweets received in this particular slot
   - `s_pos` : positive sentiment count in this bin 
   - `s_neg` : negative sentiment count in this bin
