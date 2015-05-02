@@ -9,7 +9,7 @@ OS: Ubuntu 14.04 Base Image from VCL.
 - Once the vcl instance is ready, download the tweet_analysis/ folder inside $HOME.
 - Run `sudo sh setup.sh` inside project folder. This will install all the required programs for running the project. 
 - Now we need to start storm topology and submit the job. Run `sparse run -t 200` inside project folder. This will automatically start storm instance and submit the topology to storm. `-t` option is used for specifying the run time for topology. So the above command will ensure that topology runs for 200 seconds. 
-- Now start the live dashboard by running 
+- In a separate tab, start the live dashboard by running 
   
    ```
    1. cd dashboard/
